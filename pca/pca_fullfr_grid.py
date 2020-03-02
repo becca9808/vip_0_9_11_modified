@@ -298,12 +298,16 @@ def pca_optimize_snr(cube, angle_list, source_xy, fwhm, cube_ref=None,
         y_cent, x_cent = frame_center(cube[0])
         ann_radius = dist(y_cent, x_cent, y, x)
         matrix, annind = prepare_matrix(cube, scaling, None, mode='annular',
-                                        # annulus_radius=ann_radius,
-                                        annulus_width=annulus_width,
+                                        inner_radius = 0, outer_radius = annulus_width,
+                                        # annulus_radius = ann_radius
+                                        # annulus_width=annulus_width,
                                         verbose=False)
         if cube_ref is not None:
             ref_lib, _ = prepare_matrix(cube_ref, scaling, mask_center_px,
-                                     mode='annular', # annulus_radius=ann_radius,
+                                     mode='annular', inner_radius = 0, 
+                                     outer_radius = annulus_width,
+                                        # annulus_radius = ann_radius
+                                        # annulus_width=annulus_width,
                                      annulus_width=annulus_width, verbose=False)
         else:
             ref_lib = matrix
